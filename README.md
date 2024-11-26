@@ -1,6 +1,6 @@
 <div align="center">
 
-  <h1><img src="resources/icon.png" width="65"> UPicker: a Semi-Supervised Particle Picking
+  <h1><img src="resources/icon.png" width="100"> UPicker: a Semi-Supervised Particle Picking
 Transformer Method for Cryo-EM Micrographs</h1>
 
 ![GitHub top language](https://img.shields.io/github/languages/top/JachyLikeCoding/UPicker)![GitHub last commit](https://img.shields.io/github/last-commit/JachyLikeCoding/UPicker) ![Static Badge](https://img.shields.io/badge/Platform-Linux-green)
@@ -68,6 +68,29 @@ Figure below demonstrates the particle picking workflow of **UPicker**.
 ![Alt text](<resources/pipeline.png>)
 
 ## Dataset Preparation
+You can download datasets from EMPIAR, CryoPPP or use your own dataset and organize them as following: 
+```
+UPicker_Project/
+└── data/
+    └── DATASET1/
+        ├── micrographs/
+            ├── 0001.mrc
+            ├── 0002.mrc
+            ├── (...).mrc
+        	└── xxxx.mrc
+        └── annots/
+        	├── 0001.star
+            ├── 0002.star
+            ├── (...).star
+        	└── xxxx.star
+```
+
+The micrograph name should be consistent with the coordinate file name. We support star, box, txt, csv file formats to read and write coordinate files, details can be seen in the `cryoEM/coord_io.py` file.
+
+
+Then, you need to preprocess the micrographs and get region proposals by running:
+
+
 ```
 python cryoEM/preprocess.py --box_width BOXSIZE --images data/YOUR_DATASET/micrographs/ --output_dir data/YOUR_DATASET
 ```
@@ -96,7 +119,7 @@ python cryoEM/make_coco_dataset.py --coco_path data/YOUR_DATASET --box_width BOX
 
 ```
 
-### (OPTIONAL) Clean Region proposals for pre-training 
+### (OPTIONAL) Clean region proposals for pre-training 
 Need install the `micrograph_cleaner_em` package first.
 
 ```
@@ -105,7 +128,7 @@ python cryoEM/box_clean.py \
     --boxsize BOXSIZE
 ```
 
-### 📈 Pretrain with ALoG region proposals
+### 📈 Pretrain with A-LoG region proposals
 
 ```
 python -u main.py \
@@ -118,7 +141,7 @@ python -u main.py \
     --lr_backbone 0
 ```
 
-### 🗃️ Finetune with pretrained model
+### 🗃️ Fine-tune with pretrained model
 ```
 %%bash
 
