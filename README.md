@@ -129,6 +129,7 @@ python cryoEM/box_clean.py \
 ```
 
 ### 📈 Pretrain with A-LoG region proposals
+(NOTE: The dataset should be end with "pretrain".)
 
 ```
 python -u main.py \
@@ -146,7 +147,7 @@ python -u main.py \
 %%bash
 
 python -u main.py \
-    --config_file config/DINO/DINO_4scale_50epoch.py \
+    --config_file config/UPICKER/UPICKER_4scale_50epoch.py \
     --output_dir exps/Upicker_exps/YOUR_DATASET/finetune_YOUR_DATASET \
     --dataset_file YOUR_DATASET \
     --pretrain exps/Upicker_exps/YOUR_DATASET/pretrain_YOUR_DATASET/checkpoint.pth \
@@ -171,5 +172,15 @@ python -u inference.py \
 ## Citation
 
 If you find this viewer useful, please consider citing our work:
-
-> (Wait for online)
+```
+@article{zhang2025upicker,
+  title={UPicker: a semi-supervised particle picking transformer method for cryo-EM micrographs},
+  author={Zhang, Chi and Cheng, Yiran and Feng, Kaiwen and Zhang, Fa and Han, Renmin and Feng, Jieqing},
+  journal={Briefings in Bioinformatics},
+  volume={26},
+  number={1},
+  pages={bbae636},
+  year={2025},
+  publisher={Oxford University Press}
+}
+```
